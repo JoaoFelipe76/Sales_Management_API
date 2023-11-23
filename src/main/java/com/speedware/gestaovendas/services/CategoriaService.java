@@ -63,14 +63,18 @@ public class CategoriaService {
 		return categoria.get();
 	}
 	
-	private void validarCategoriaDuplicada(Categoria categoria) {
-		
-		Categoria categoriaEncontrada = (Categoria) categoriaRepository.findByNome(categoria.getNome());
-		if (categoriaEncontrada != null && categoriaEncontrada.getCodigo() != categoria.getCodigo()) {
-			throw new RegraNegocioExeption(String.format("A categoria %s ja esta cadastrada", categoria.getNome().toUpperCase()));
-		}
-		
-	}
+        private void validarCategoriaDuplicada(Categoria categoria) {
+	    List<Categoria> categoriasEncontradas = categoriaRepository.findByNome(categoria.getNome());
 
-}
+	    
+	    if (!categoriasEncontradas.isEmpty()) {
+	        
+	        for (Categoria categoriaEncontrada : categoriasEncontradas) {
+	            if (!categoriaEncontrada.getCodigo().equals(categoria.getCodigo())) {
+	                throw new RegraNegocioExeption(
+	                        String.format("A categoria %s já está cadastrada", categoria.getNome().toUpperCase()));
+	            }
+	        }
+	    }
+	}
 
