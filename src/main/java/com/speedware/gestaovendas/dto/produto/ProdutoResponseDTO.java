@@ -1,11 +1,13 @@
 package com.speedware.gestaovendas.dto.produto;
 
+
 import java.math.BigDecimal;
 
 import com.speedware.gestaovendas.dto.categoria.CategoriaResponseDTO;
 import com.speedware.gestaovendas.entities.Produto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+
 
 @Schema(name = "Produto retorno DTO")
 public class ProdutoResponseDTO {
@@ -25,7 +27,7 @@ public class ProdutoResponseDTO {
 	@Schema(name = "Preço Venda")
 	private BigDecimal precoVenda;
 
-	@Schema(name = "Observção")
+	@Schema(name = "Observação")
 	private String observacao;
 
 	@Schema(name = "Categoria")
@@ -33,7 +35,6 @@ public class ProdutoResponseDTO {
 
 	public ProdutoResponseDTO(Long codigo, String descricao, Integer quantidade, BigDecimal precoCusto,
 			BigDecimal precoVenda, String observacao, CategoriaResponseDTO categoria) {
-
 		this.codigo = codigo;
 		this.descricao = descricao;
 		this.quantidade = quantidade;
@@ -44,11 +45,9 @@ public class ProdutoResponseDTO {
 	}
 
 	public static ProdutoResponseDTO converterParaProdutoDTO(Produto produto) {
-
 		return new ProdutoResponseDTO(produto.getCodigo(), produto.getDescricao(), produto.getQuantidade(),
 				produto.getPrecoCusto(), produto.getPrecoVenda(), produto.getObservacao(),
 				CategoriaResponseDTO.converterParaCategoriaDTO(produto.getCategoria()));
-
 	}
 
 	public Long getCodigo() {
@@ -106,5 +105,4 @@ public class ProdutoResponseDTO {
 	public void setCategoria(CategoriaResponseDTO categoria) {
 		this.categoria = categoria;
 	}
-
 }

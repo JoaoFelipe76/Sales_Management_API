@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+
 @Schema(name = "Produto requisição DTO")
 public class ProdutoRequestDTO {
 
@@ -31,22 +32,18 @@ public class ProdutoRequestDTO {
 	@NotNull(message = "Preço venda")
 	private BigDecimal precoVenda;
 
-	@Schema(name = "Observção")
+	@Schema(name = "Observação")
 	@Length(max = 500, message = "Observação")
 	private String observacao;
 
 	public Produto converterParaEntidade(Long codigoCategoria) {
-
 		return new Produto(descricao, quantidade, precoCusto, precoVenda, observacao, new Categoria(codigoCategoria));
+	}
 
+	public Produto converterParaEntidade(Long codigoCategoria, Long codigoProduto) {
+		return new Produto(codigoProduto, descricao, quantidade, precoCusto, precoVenda, observacao, new Categoria(codigoCategoria));
 	}
 	
-	public Produto converterParaEntidade(Long codigoCategoria, Long codigoProduto) {
-
-		return new Produto(codigoProduto, descricao, quantidade, precoCusto, precoVenda, observacao, new Categoria(codigoCategoria));
-
-	}
-
 	public String getDescricao() {
 		return descricao;
 	}
@@ -86,7 +83,5 @@ public class ProdutoRequestDTO {
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
 	}
-	
-	
 
 }

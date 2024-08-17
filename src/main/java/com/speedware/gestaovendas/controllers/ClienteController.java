@@ -39,7 +39,7 @@ public class ClienteController {
 	@GetMapping
 	public List<ClienteResponseDTO> listarTodas() {
 
-		return clienteService.listarTodos().stream().map(cliente -> ClienteResponseDTO.covereterParaClienteDTO(cliente))
+		return clienteService.listarTodos().stream().map(cliente -> ClienteResponseDTO.converterParaClienteDTO(cliente))
 				.collect(Collectors.toList());
 	}
 
@@ -48,7 +48,7 @@ public class ClienteController {
 	public ResponseEntity<ClienteResponseDTO> buscarPorId(@PathVariable Long codigo) {
 
 		Optional<Cliente> cliente = clienteService.buscarPorCodigo(codigo);
-		return cliente.isPresent() ? ResponseEntity.ok(ClienteResponseDTO.covereterParaClienteDTO(cliente.get()))
+		return cliente.isPresent() ? ResponseEntity.ok(ClienteResponseDTO.converterParaClienteDTO(cliente.get()))
 				: ResponseEntity.notFound().build();
 
 	}
@@ -59,7 +59,7 @@ public class ClienteController {
 
 		Cliente clienteSalvar = clienteService.salvarCliente(clienteDto.converterParaEntidade());
 		return ResponseEntity.status(HttpStatus.CREATED)
-				.body(ClienteResponseDTO.covereterParaClienteDTO(clienteSalvar));
+				.body(ClienteResponseDTO.converterParaClienteDTO(clienteSalvar));
 	}
 	
 	@Operation(summary = "Atualizar Cliente")
@@ -67,7 +67,7 @@ public class ClienteController {
 	public ResponseEntity<ClienteResponseDTO> atualizar(@PathVariable Long codigo,@Valid @RequestBody ClienteRequestDTO clienteDto){
 		
 		Cliente clienteAtualizado = clienteService.atualizarCliente(codigo, clienteDto.converterParaEntidade(codigo));
-	    return ResponseEntity.ok(ClienteResponseDTO.covereterParaClienteDTO(clienteAtualizado));
+	    return ResponseEntity.ok(ClienteResponseDTO.converterParaClienteDTO(clienteAtualizado));
 		
 	}
 	

@@ -11,10 +11,3 @@ services:
       MYSQL_PASSWORD: gvendas
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: speedware_db
-
-
-
-
-  
-
-
